@@ -6,6 +6,7 @@ from google.appengine.ext import ndb
 
 import jinja2
 import webapp2
+from models import *
 
 _DEBUG = True
 
