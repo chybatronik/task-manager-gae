@@ -1,0 +1,40 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<form class="form-horizontal" action="/tasks/create" method="post">
+
+  <div class="control-group">
+    <label class="control-label" for="inputTitle">Title</label>
+    <div class="controls">
+      <input type="text" name="title" id="inputTitle" placeholder="Title">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputText">Text</label>
+    <div class="controls">
+      <textarea rows="3" name="text" id="inputText" placeholder="Text"></textarea>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputcompany">Company</label>
+    <div class="controls">
+      <select name="company" id="inputcompany">
+        {% for company in companies %}
+          <option value="{{company.key().id()}}">{{company.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Create</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}

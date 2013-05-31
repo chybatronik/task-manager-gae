@@ -1,0 +1,35 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Text</th>
+      <th>Company</th>
+      <th>atach_users</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      {% for task in tasks %}
+        <tr>
+            <td><a href="/tasks/{{ task.key().id()}}">{{ task.title }}</a></td>
+            <td>{{ task.text }}</td>
+            <td>{{ task.company.name }}</td>
+            <td class="span1">{{ task.atach_users }}</td>
+            <td class="span1"><a href="tasks/{{task.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
+            <td class="span1">
+              <form action="/tasks/{{ task.key().id()}}/delete" method="post" class="not_visible">
+                <button type="submit" class="btn btn-mini delete">Delete</button>
+              </form>       
+            </td>
+        </tr>
+      {% endfor %}
+    
+  </tbody>
+</table>
+
+<a class="btn btn-info" href="/tasks/create">Create new task</a>
+{% endblock %}

@@ -1,5 +1,6 @@
 from base_controller import *
 from company_controller import *
+from task_controller import *
 
 _DEBUG = True
 
@@ -22,5 +23,11 @@ application = webapp2.WSGIApplication([
     ('/companies/(\d+)', ShowCompanyPage),
     ('/companies/(\d+)/edit', EditCompanyPage),
     ('/companies/(\d+)/delete', DeleteCompanyPage),
+
+    ('/tasks', AllTaskPage),
+    ('/tasks/create', CreateTaskPage),
+    ('/tasks/(\d+)', ShowTaskPage),
+    ('/tasks/(\d+)/edit', EditTaskPage),
+    ('/tasks/(\d+)/delete', DeleteTaskPage),
     
 ], debug=_DEBUG)
