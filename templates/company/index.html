@@ -16,9 +16,10 @@
         <tr>
             <td><a href="/companies/{{ company.key().id()}}">{{ company.name }}</a></td>
             <td>{{ company.email }}</td>
-            <td>{{ company.atach_users }}</td>
-            <td>
-              <form action="/companies/{{ company.key().id()}}/delete" method="post">
+            <td class="span1">{{ company.atach_users }}</td>
+            <td class="span1"><a href="companies/{{company.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
+            <td class="span1">
+              <form action="/companies/{{ company.key().id()}}/delete" method="post" class="not_visible">
                 <button type="submit" class="btn btn-mini delete">Delete</button>
               </form>       
             </td>

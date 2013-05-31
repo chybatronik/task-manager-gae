@@ -1,3 +1,8 @@
 .content{
     margin-top: 60px;
 }
+
+.not_visible{
+    margin-bottom :0px !important;
+    padding :0px;
+}
