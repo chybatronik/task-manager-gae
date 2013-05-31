@@ -51,10 +51,13 @@ class ShowCompanyPage(BaseRequestHandler):
         self.generate("company/show.html", template_values)
 
 class CreateCompanyPage(BaseRequestHandler):
-    def post(self, company_id = None):
+    def get (self):
+        self.generate("company/new.html", {})
+
+    def post(self):
         com = Company(name = self.request.get("name"), email = self.request.get("email"), 
             create_by = users.get_current_user()).put()
-        self.redirect("/companies")  
+        self.redirect("/companies/" + str(com.id()))  
 
 class EditCompanyPage(BaseRequestHandler):
     def get(self, company_id):
@@ -67,6 +70,8 @@ class EditCompanyPage(BaseRequestHandler):
         com = Company.get_by_id(int(company_id))
         com.name = self.request.get("name")
         com.email = self.request.get("email")
+        com.put()
+        self.redirect("/companies/" + str(com.key().id())) 
 
 
 class DeleteCompanyPage(BaseRequestHandler):

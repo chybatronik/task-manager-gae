@@ -1,0 +1,21 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<dl class="dl-horizontal">
+  <dt>Name</dt>
+  <dd>{{ company.name }}</dd>
+
+  <dt>Email</dt>
+  <dd>{{ company.email }}</dd>
+
+  <dt>Attach Users</dt>
+  <dd>{{ company.atach_users }}</dd>
+
+  <dt>Create by</dt>
+  <dd>{{ company.create_by }}</dd>
+</dl>
+
+<a class="btn btn-info" href="/companies/{{ company.key().id() }}/edit">Edit</a>
+<a class="btn btn-info" href="/companies">All</a>
+
+{% endblock %}
