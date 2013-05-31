@@ -5,6 +5,7 @@ class Company(db.Model):
     name = db.StringProperty(required=True)
     date = db.DateTimeProperty(auto_now_add=True)
     email = db.EmailProperty(required=True)
+    atach_users = db.ListProperty(User)
     create_by = db.UserProperty(required=True)
 
 
