@@ -18,7 +18,6 @@ class BaseRequestHandler(webapp2.RequestHandler):
         values = {
             'request': self.request,
             'user': users.get_current_user(),
-            'nick_name':users.get_current_user().nickname(),
             'login_url': users.create_login_url(self.request.uri),
             'url_sing_out': users.create_logout_url('http://%s/' % (
                 self.request.host))}
@@ -36,6 +35,52 @@ class IndexPage(BaseRequestHandler):
         template = ENV.get_template('index.html')
         self.generate("index.html", template_values)
 
+class AllCompanyPage(BaseRequestHandler):
+    def get(self):
+        companies = Company.all()
+        template_values = {
+            "companies":companies,
+        }
+        self.generate("company/index.html", template_values)
+
+class ShowCompanyPage(BaseRequestHandler):
+    def get(self, company_id ):
+        template_values = {
+            "company":Company.get_by_id(int(company_id)),
+        }
+        self.generate("company/show.html", template_values)
+
+class CreateCompanyPage(BaseRequestHandler):
+    def post(self, company_id = None):
+        com = Company(name = self.request.get("name"), email = self.request.get("email"), 
+            create_by = users.get_current_user()).put()
+        self.redirect("/companies")  
+
+class EditCompanyPage(BaseRequestHandler):
+    def get(self, company_id):
+        template_values = {
+            "company":Company.get_by_id(int(company_id)),
+        }
+        self.generate("company/edit.html", template_values)
+
+    def post(self, company_id):
+        com = Company.get_by_id(int(company_id))
+        com.name = self.request.get("name")
+        com.email = self.request.get("email")
+
+
+class DeleteCompanyPage(BaseRequestHandler):
+    def post(self, company_id):
+        com = Company.get_by_id(int(company_id))
+        db.delete(com)
+        self.redirect("/companies") 
+
 application = webapp2.WSGIApplication([
     ('/', IndexPage),
+    ('/companies', AllCompanyPage),
+    ('/companies/create', CreateCompanyPage),
+    ('/companies/(\d+)', ShowCompanyPage),
+    ('/companies/(\d+)/edit', EditCompanyPage),
+    ('/companies/(\d+)/delete', DeleteCompanyPage),
+    
 ], debug=_DEBUG)
