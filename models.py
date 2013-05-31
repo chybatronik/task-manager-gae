@@ -11,8 +11,9 @@ class Company(db.Model):
 
 class Task(db.Model):
     title = db.StringProperty(required=True)
-    text = db.TextProperty()    
-    is_done = db.BooleanProperty(default=False)    
+    text = db.TextProperty()
+    is_done = db.BooleanProperty(default=False)
     atach_users = db.ListProperty(User)
+    priority = db.RatingProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     create_by = db.UserProperty(required=True)
