@@ -38,4 +38,18 @@ class TaskTestCase(unittest.TestCase):
     task1 = Task(title = "Name", create_by= user)
     task1.put()
     self.assertEqual(False, task1.is_done)
+    
+  def test_list_user_Task(self):
+    user1 = User(email = "test1@foo.com")
+    user2 = User(email = "test2@foo.com")
+
+    task1 = Task(title = "Name", create_by= user1, atach_users = [user1, user2])
+    task1.put()
+
+    self.assertEqual(1, len(Task.all().fetch(10)))
+    self.assertEqual(2, len(Task.all().fetch(1)[0].atach_users))
+    self.assertEqual(user1, Task.all().fetch(1)[0].atach_users[0])
+    self.assertEqual(user2, Task.all().fetch(1)[0].atach_users[1])
+
+
 
