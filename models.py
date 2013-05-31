@@ -17,3 +17,4 @@ class Task(db.Model):
     priority = db.RatingProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     create_by = db.UserProperty(required=True)
+    company = db.ReferenceProperty(Company, required=True)
