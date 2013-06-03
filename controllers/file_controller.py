@@ -142,8 +142,3 @@ class DownloadHandler(blobstore_handlers.BlobstoreDownloadHandler):
             self.response.headers['Cache-Control'] =\
                 'public,max-age=%d' % EXPIRATION_TIME
             self.send_blob(key, save_as=filename)
-
-class UploadPage(BaseRequestHandler):
-    def get(self):
-        template_values = {}
-        self.generate("files/upload.html", template_values)
