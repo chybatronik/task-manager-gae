@@ -37,3 +37,6 @@ class Task(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
     create_by = db.UserProperty(required=True)
     company = db.ReferenceProperty(Company, required=True)
+
+class UserInsurance(db.Model):
+    user = db.UserProperty(required=True)

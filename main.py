@@ -1,6 +1,6 @@
-from base_controller import *
-from company_controller import *
-from task_controller import *
+from controllers.base_controller import *
+from controllers.company_controller import *
+from controllers.task_controller import *
 
 _DEBUG = True
 
@@ -12,7 +12,6 @@ class IndexPage(BaseRequestHandler):
         template_values = {
         }
 
-        template = ENV.get_template('index.html')
         self.generate("index.html", template_values)
 
 
