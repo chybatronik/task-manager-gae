@@ -16,6 +16,11 @@
 
   <dt>company</dt>
   <dd>{{ task.company.name }}</dd>
+
+  <dt>files</dt>
+  {% for file in task.attach_files %}
+    <dd>{{ file }}</dd>
+  {% endfor%}
 </dl>
 
 <a class="btn btn-info" href="/tasks/{{ task.key().id() }}/edit">Edit</a>

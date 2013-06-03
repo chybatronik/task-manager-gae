@@ -2,6 +2,8 @@ import os
 
 from google.appengine.api import users
 from google.appengine.ext import db
+from google.appengine.ext.blobstore import BlobInfo
+from google.appengine.ext import blobstore
 
 import jinja2
 import webapp2

@@ -1,6 +1,7 @@
 from re import match, IGNORECASE, UNICODE, VERBOSE
 from google.appengine.ext import db
 from google.appengine.api.users import User
+from google.appengine.ext import blobstore
 
 def valid_email(email):
     if not email:
@@ -33,6 +34,7 @@ class Task(db.Model):
     text = db.TextProperty()
     is_done = db.BooleanProperty(default=False)
     atach_users = db.ListProperty(User)
+    attach_files = db.ListProperty(blobstore.BlobKey)
     priority = db.RatingProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     create_by = db.UserProperty(required=True)

@@ -80,6 +80,7 @@ class UploadHandler(webapp2.RequestHandler):
                 )
                 blob_keys.append(blob_key)
                 result['delete_type'] = 'DELETE'
+                result['key'] = blob_key
                 result['delete_url'] = self.request.host_url +\
                     '/uploads?key=' + urllib.quote(blob_key, '')
                 if (IMAGE_TYPES.match(result['type'])):

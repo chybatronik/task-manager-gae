@@ -13,6 +13,9 @@ class ShowTaskPage(BaseRequestHandler):
         template_values = {
             "task":Task.get_by_id(int(task_id)),
         }
+        print template_values["task"].attach_files
+
+
         self.generate("task/show.html", template_values)
 
 class CreateTaskPage(BaseRequestHandler):
@@ -28,6 +31,17 @@ class CreateTaskPage(BaseRequestHandler):
         try:
             company = Company.get_by_id(int(self.request.get("company")))
 
+            attach_keys =  self.request.get("attach_files").split(",")[0:-1]
+            attach_files = []
+            for key in attach_keys:
+                attach_files.append(BlobInfo.get(key).key())
+
+            print "attach_files", attach_files
+            print "attach_files", attach_files
+            print "attach_files", attach_files
+            print "attach_files", attach_files
+            print "attach_files", attach_files
+
             users_u =  self.request.get_all("users")
             users_array = []
             for user in users_u:
@@ -37,7 +51,8 @@ class CreateTaskPage(BaseRequestHandler):
                         text = self.request.get("text"), 
                         create_by = users.get_current_user(), 
                         company = company, 
-                        atach_users = users_array).put()
+                        atach_users = users_array,
+                        attach_files = attach_files).put()
             self.redirect("/tasks/" + str(task.id()))  
         except db.BadValueError, errors:
             self.get(errors)
