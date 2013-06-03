@@ -1,0 +1,15 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<dl class="dl-horizontal">
+  <dt>Name</dt>
+  <dd>{{ user_insurance.user.nickname() }}</dd>
+
+  <dt>Email</dt>
+  <dd>{{ user_insurance.user.email() }}</dd>
+
+</dl>
+
+<a class="btn btn-info" href="/users">All</a>
+
+{% endblock %}

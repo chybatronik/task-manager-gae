@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<form class="form-horizontal" action="/users/invite" method="post">
+
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+      <input type="text" name="email" id="inputEmail" placeholder="Email">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Invite</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}
