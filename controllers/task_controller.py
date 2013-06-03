@@ -27,8 +27,17 @@ class CreateTaskPage(BaseRequestHandler):
     def post(self):
         try:
             company = Company.get_by_id(int(self.request.get("company")))
-            task = Task(title = self.request.get("title"), text = self.request.get("text"), 
-                create_by = users.get_current_user(), company = company).put()
+
+            users_u =  self.request.get_all("users")
+            users_array = []
+            for user in users_u:
+                users_array.append(UserInsurance.get_by_id(int(user)).user)
+
+            task = Task(title = self.request.get("title"), 
+                        text = self.request.get("text"), 
+                        create_by = users.get_current_user(), 
+                        company = company, 
+                        atach_users = users_array).put()
             self.redirect("/tasks/" + str(task.id()))  
         except db.BadValueError, errors:
             self.get(errors)

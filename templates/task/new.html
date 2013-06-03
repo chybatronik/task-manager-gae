@@ -28,6 +28,17 @@
       </select>
     </div>
   </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputusers">Attach users</label>
+    <div class="controls">
+      <select name="users" id="inputusers" multiple="multiple">
+        {% for user in users %}
+          <option value="{{user.key().id()}}">{{user.user.email()}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
   
   <div class="control-group">
     <div class="controls">
