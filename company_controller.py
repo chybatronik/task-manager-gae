@@ -24,30 +24,34 @@ class CreateCompanyPage(BaseRequestHandler):
             com = Company(name = self.request.get("name"), email = self.request.get("email"), 
                 create_by = users.get_current_user()).put()
             self.redirect("/companies/" + str(com.id()))  
-        except db.BadValueError, error:
+        except db.BadValueError, errors:
             template_values = {
-                "errors":error,
+                "errors":errors,
             }
             self.get(template_values)
-        
 
 class EditCompanyPage(BaseRequestHandler):
-    def get(self, company_id):
+    def get(self, company_id, errors=None):
         template_values = {
             "company":Company.get_by_id(int(company_id)),
+            "errors": errors,
         }
+
         self.generate("company/edit.html", template_values)
 
     def post(self, company_id):
-        com = Company.get_by_id(int(company_id))
-        com.name = self.request.get("name")
-        com.email = self.request.get("email")
-        com.put()
-        self.redirect("/companies/" + str(com.key().id())) 
+        try:
+            com = Company.get_by_id(int(company_id))
+            com.name = self.request.get("name")
+            com.email = self.request.get("email")
+            com.put()
+            self.redirect("/companies/" + str(com.key().id()))
+        except db.BadValueError, errors:
+            self.get(int(company_id), errors)
 
 
 class DeleteCompanyPage(BaseRequestHandler):
     def post(self, company_id):
         com = Company.get_by_id(int(company_id))
         db.delete(com)
-        self.redirect("/companies") 
+        self.redirect("/companies")
