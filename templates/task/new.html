@@ -1,51 +1,56 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
+<div class="row-fluid">
+  <div class="span4">
+    <form class="form-horizontal" action="/tasks/create" method="post">
 
-<form class="form-horizontal" action="/tasks/create" method="post">
+      <div class="control-group">
+        <label class="control-label" for="inputTitle">Title</label>
+        <div class="controls">
+          <input type="text" name="title" id="inputTitle" placeholder="Title">
+        </div>
+      </div>
 
-  <div class="control-group">
-    <label class="control-label" for="inputTitle">Title</label>
-    <div class="controls">
-      <input type="text" name="title" id="inputTitle" placeholder="Title">
-    </div>
+      <div class="control-group">
+        <label class="control-label" for="inputText">Text</label>
+        <div class="controls">
+          <textarea rows="3" name="text" id="inputText" placeholder="Text"></textarea>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputcompany">Company</label>
+        <div class="controls">
+          <select name="company" id="inputcompany">
+            {% for company in companies %}
+              <option value="{{company.key().id()}}">{{company.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputusers">Attach users</label>
+        <div class="controls">
+          <select name="users" id="inputusers" multiple="multiple">
+            {% for user in users %}
+              <option value="{{user.key().id()}}">{{user.user.email()}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn">Create</button>
+        </div>
+      </div>
+    </form>
   </div>
-
-  <div class="control-group">
-    <label class="control-label" for="inputText">Text</label>
-    <div class="controls">
-      <textarea rows="3" name="text" id="inputText" placeholder="Text"></textarea>
-    </div>
+  <div class="span7 offset1">
+    {% include 'files/upload.html' %}
   </div>
-
-  <div class="control-group">
-    <label class="control-label" for="inputcompany">Company</label>
-    <div class="controls">
-      <select name="company" id="inputcompany">
-        {% for company in companies %}
-          <option value="{{company.key().id()}}">{{company.name}}</option>
-        {% endfor %}
-      </select>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label" for="inputusers">Attach users</label>
-    <div class="controls">
-      <select name="users" id="inputusers" multiple="multiple">
-        {% for user in users %}
-          <option value="{{user.key().id()}}">{{user.user.email()}}</option>
-        {% endfor %}
-      </select>
-    </div>
-  </div>
-  
-  <div class="control-group">
-    <div class="controls">
-      <button type="submit" class="btn">Create</button>
-    </div>
-  </div>
-</form>
-
+</div>
 
 {% endblock %}
