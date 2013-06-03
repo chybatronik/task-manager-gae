@@ -27,8 +27,6 @@ class Company(db.Model):
     atach_users = db.ListProperty(User)
     create_by = db.UserProperty(required=True)
 
-    
-
 
 class Task(db.Model):
     title = db.StringProperty(required=True)

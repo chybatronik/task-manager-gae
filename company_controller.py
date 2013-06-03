@@ -16,13 +16,20 @@ class ShowCompanyPage(BaseRequestHandler):
         self.generate("company/show.html", template_values)
 
 class CreateCompanyPage(BaseRequestHandler):
-    def get (self):
-        self.generate("company/new.html", {})
+    def get (self, template_values={}):
+        self.generate("company/new.html", template_values)
 
     def post(self):
-        com = Company(name = self.request.get("name"), email = self.request.get("email"), 
-            create_by = users.get_current_user()).put()
-        self.redirect("/companies/" + str(com.id()))  
+        try:
+            com = Company(name = self.request.get("name"), email = self.request.get("email"), 
+                create_by = users.get_current_user()).put()
+            self.redirect("/companies/" + str(com.id()))  
+        except db.BadValueError, error:
+            template_values = {
+                "errors":error,
+            }
+            self.get(template_values)
+        
 
 class EditCompanyPage(BaseRequestHandler):
     def get(self, company_id):

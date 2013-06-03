@@ -10,7 +10,13 @@
   </head>
   <body>
     {% include 'layout/navigate.html' %}
+
     <div class="container content">
+        {% if errors %}
+          <div class="alert alert-error">
+              {{errors}}
+          </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </div>
  </body>
