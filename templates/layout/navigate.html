@@ -9,16 +9,16 @@
           <a class="brand" href="/">Insurance</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active">
+              <li {% if "/" == request.path%}class="active"{%endif%}>
                 <a href="/">Home</a>
               </li>
-              <li class="">
+              <li {% if "/companies" in request.path%}class="active"{%endif%}>
                 <a href="/companies">Companies</a>
               </li>
-              <li class="">
+              <li {% if "/tasks" in request.path%}class="active"{%endif%}>
                 <a href="/tasks">Tasks</a>
               </li>
-              <li class="">
+              <li {% if "/users" in request.path%}class="active"{%endif%}>
                 <a href="/users">Users</a>
               </li>
             </ul>
