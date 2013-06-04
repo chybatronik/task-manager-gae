@@ -30,9 +30,47 @@
         </div>
       </div>
 
+      <div class="control-group hidden">
+        <label class="control-label" for="inputusers">Attach files</label>
+        <div class="controls">
+          <textarea id="attach_files" name="attach_files"></textarea>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="inputusers">Attach files</label>
+        <div class="controls">
+          <table>
+          {% for file in task.get_urls_attach_files() %}
+            {% if file.image_url %}
+            <tr>
+                <td>
+                  <a href="{{file.image_url}}" title="{{file.filename}}" data-gallery="gallery">
+                    <img src="{{ file.image_url_200 }}" class="img-rounded">
+                  </a>
+                </td>
+                <td>
+                  <button class="btn btn-danger delete" data-type="DELETE" data-url="{{ request.host_url + file.delete_url }}">
+                    <i class="icon-trash icon-white"></i>
+                  </button>
+                </td>
+              </tr>
+
+            {% else%}
+              <a href="{{file.link_file}}">
+                <i class="icon-file  icon-3x"></i> 
+                {{ file.filename }}
+              </a>
+            {% endif%}
+        
+          {% endfor%}
+        </table>
+        </div>
+      </div>
+
       <div class="control-group">
         <div class="controls">
-          <button type="submit" class="btn">Save</button>
+          <button type="submit" id="save" class="btn">Save</button>
         </div>
       </div>
     </form>
@@ -41,4 +79,19 @@
     {% include 'files/upload.html' %}
   </div>
 </div>
+
+<script>
+// add uploading files into form
+$("#save").click(function(event) {
+  event.preventDefault();
+  console.log("click submit");
+  array = $(".template-download .name a");
+  for (var i = array.length - 1; i >= 0; i--) {
+    key = $(array[i]).attr("key");
+    $("#attach_files").append(key + ",");
+  };
+  $("#form_create").submit();
+});
+</script>
+
 {% endblock %}

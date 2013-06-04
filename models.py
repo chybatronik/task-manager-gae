@@ -3,6 +3,7 @@ from google.appengine.ext import db
 from google.appengine.api.users import User
 from google.appengine.ext import blobstore
 from google.appengine.api.images import get_serving_url
+import urllib
 
 def valid_email(email):
     if not email:
@@ -47,8 +48,7 @@ class Task(db.Model):
             blob_info = blobstore.BlobInfo.get(key)
             filename =  blob_info.filename
             extensionsToCheck = ('.png', '.jpeg', '.jpg')        
-            if filename.lower().endswith(extensionsToCheck):
-                
+            if filename.lower().endswith(extensionsToCheck):                
                 image_url_200 = get_serving_url(key, 200)
                 image_url = get_serving_url(key)
             else:
@@ -59,7 +59,8 @@ class Task(db.Model):
                 "image_url_200":image_url_200,
                 "image_url":image_url,
                 "filename":filename,
-                "link_file":"/server?key="+str(key)
+                "link_file":"/server?key="+str(key),
+                "delete_url":'/uploads?key=' + str(key)
             }
 
             result.append(di)
