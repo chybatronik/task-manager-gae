@@ -19,10 +19,11 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: '/uploads'
+        url: '/uploads',
+        //acceptFileTypes: /(\.|\/)(gif|jpe?g|png|txt|docx?|xlsx?|pdf|rar|zip|7z)$/i,
     });
 
-    // Enable iframe cross-domain access via redirect option:
+    /*// Enable iframe cross-domain access via redirect option:
     $('#fileupload').fileupload(
         'option',
         'redirect',
@@ -30,5 +31,5 @@ $(function () {
             /\/[^\/]*$/,
             '/cors/result.html?%s'
         )
-    );
+    );*/
 });

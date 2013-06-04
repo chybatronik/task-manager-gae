@@ -2,6 +2,7 @@ from re import match, IGNORECASE, UNICODE, VERBOSE
 from google.appengine.ext import db
 from google.appengine.api.users import User
 from google.appengine.ext import blobstore
+from google.appengine.api.images import get_serving_url
 
 def valid_email(email):
     if not email:
@@ -39,6 +40,17 @@ class Task(db.Model):
     date = db.DateTimeProperty(auto_now_add=True)
     create_by = db.UserProperty(required=True)
     company = db.ReferenceProperty(Company, required=True)
+
+    def get_urls_attach_files(self):
+        result = []
+        for key in self.attach_files:
+            di = {
+                "image_url":get_serving_url(key, 200),
+                "link_file":"/server?key="+str(key)
+            }
+
+            result.append(di)
+        return result
 
 class UserInsurance(db.Model):
     user = db.UserProperty(required=True)

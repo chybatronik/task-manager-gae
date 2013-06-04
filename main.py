@@ -37,6 +37,6 @@ application = webapp2.WSGIApplication([
     ('/users/(\d+)/delete', DeleteUserInsurancePage),
 
     ('/uploads', UploadHandler),
-    ('/server/([^/]+)/([^/]+)', DownloadHandler)
+    ('/server', DownloadHandler)
     
 ], debug=_DEBUG)

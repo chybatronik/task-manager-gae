@@ -7,20 +7,23 @@ import re
 import urllib
 import webapp2
 from base_controller import *
+from mimetypes import *
 
 WEBSITE = '/'
 MIN_FILE_SIZE = 1  # bytes
 MAX_FILE_SIZE = 5000000  # bytes
-IMAGE_TYPES = re.compile('image/(gif|p?jpeg|(x-)?png)')
+IMAGE_TYPES = re.compile('.*/.*')
 ACCEPT_FILE_TYPES = IMAGE_TYPES
 THUMBNAIL_MODIFICATOR = '=s80'  # max width / height
-EXPIRATION_TIME = 300  # seconds
+EXPIRATION_TIME = 60*60*24*30  # seconds
 
 
 def cleanup(blob_keys):
     blobstore.delete(blob_keys)
 
-
+def mime_type(filename):
+    return guess_type(filename)[0]
+    
 class UploadHandler(webapp2.RequestHandler):
 
     def initialize(self, request, response):
@@ -100,11 +103,11 @@ class UploadHandler(webapp2.RequestHandler):
                         '/' + blob_key + '/' + urllib.quote(
                             result['name'].encode('utf-8'), '')
             results.append(result)
-        deferred.defer(
-            cleanup,
-            blob_keys,
-            _countdown=EXPIRATION_TIME
-        )
+        # deferred.defer(
+        #     cleanup,
+        #     blob_keys,
+        #     _countdown=EXPIRATION_TIME
+        # )
         return results
 
     def options(self):
@@ -135,11 +138,14 @@ class UploadHandler(webapp2.RequestHandler):
 
 
 class DownloadHandler(blobstore_handlers.BlobstoreDownloadHandler):
-    def get(self, key, filename):
-        if not blobstore.get(key):
+    def get(self):
+        if not blobstore.get(self.request.get('key')):
             self.error(404)
         else:
             # Cache for the expiration time:
-            self.response.headers['Cache-Control'] =\
-                'public,max-age=%d' % EXPIRATION_TIME
-            self.send_blob(key, save_as=filename)
+            blob_key = self.request.get('key')
+            blob_key = str(urllib.unquote(blob_key))
+            blob_info = blobstore.BlobInfo.get(blob_key)
+            content_type1 =mime_type(blob_info.filename)
+            save_as1 =  blob_info.filename
+            self.send_blob(blob_key,content_type=content_type1,save_as=save_as1)
