@@ -35,7 +35,7 @@ class UploadTestCase(unittest.TestCase):
 
     self.browser.is_element_present_by_name('files[]', wait_time=10)
 
-    self.browser.attach_file('files[]', 'test/1.png')
+    self.browser.attach_file('files[]', os.path.join(os.path.dirname(__file__),'1.png'))
     #self.browser.attach_file('files[]', 'test/1.png')
     self.browser.find_by_css('.btn.btn-primary.start').first.click()
 
