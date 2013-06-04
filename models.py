@@ -44,8 +44,21 @@ class Task(db.Model):
     def get_urls_attach_files(self):
         result = []
         for key in self.attach_files:
+            blob_info = blobstore.BlobInfo.get(key)
+            filename =  blob_info.filename
+            extensionsToCheck = ('.png', '.jpeg', '.jpg')        
+            if filename.lower().endswith(extensionsToCheck):
+                
+                image_url_200 = get_serving_url(key, 200)
+                image_url = get_serving_url(key)
+            else:
+                image_url = None
+                image_url_200 = None
+
             di = {
-                "image_url":get_serving_url(key, 200),
+                "image_url_200":image_url_200,
+                "image_url":image_url,
+                "filename":filename,
                 "link_file":"/server?key="+str(key)
             }
 

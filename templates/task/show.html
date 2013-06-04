@@ -18,13 +18,20 @@
   <dd>{{ task.company.name }}</dd>
 
   <dt>files</dt>
-    <ul class="inline">
+    <div id="gallery" role="presentation" class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
       {% for file in task.get_urls_attach_files() %}
-
-        <li style="padding:5px"><a href="{{file.link_file}}"><img src="{{ file.image_url }}" class="img-rounded" /></a></li>
+        {% if file.image_url %}
+          <a href="{{file.image_url}}" title="{{file.filename}}" data-gallery="gallery">
+            <img src="{{ file.image_url_200 }}" class="img-rounded">
+          </a>
+        {% else%}
+          <a href="{{file.link_file}}">
+            <i class="icon-file  icon-3x"></i> 
+            {{ file.filename }}
+          </a>
+        {% endif%}
     
       {% endfor%}
-    </ul>
 </dl>
 
 <a class="btn btn-info" href="/tasks/{{ task.key().id() }}/edit">Edit</a>
