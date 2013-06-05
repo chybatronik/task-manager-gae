@@ -75,7 +75,7 @@ class EditTaskPage(BaseRequestHandler):
             task.text = self.request.get("text")
             task.company = company
             task.attach_users = users_array
-            task.attach_files = attach_files
+            task.attach_files = task.attach_files + attach_files
             task.put()
             self.redirect("/tasks/" + str(task.key().id())) 
         except db.BadValueError, errors:
