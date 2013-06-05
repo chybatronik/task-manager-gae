@@ -50,13 +50,16 @@ class Task(db.Model):
             extensionsToCheck = ('.png', '.jpeg', '.jpg')        
             if filename.lower().endswith(extensionsToCheck):                
                 image_url_200 = get_serving_url(key, 200)
+                image_url_40 = get_serving_url(key, 40)
                 image_url = get_serving_url(key)
             else:
                 image_url = None
                 image_url_200 = None
+                image_url_40 = None
 
             di = {
                 "image_url_200":image_url_200,
+                "image_url_40":image_url_40,
                 "image_url":image_url,
                 "filename":filename,
                 "link_file":"/server?key="+str(key),

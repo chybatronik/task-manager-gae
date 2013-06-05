@@ -13,6 +13,7 @@
       <th>Text</th>
       <th>Company</th>
       <th>attach_users</th>
+      <th>attach_files</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,23 @@
                 </li>
               {% endfor %}
               </ul>
+            </td>
+            <td class="span5">
+              <div id="gallery" role="presentation" class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+                {% for file in task.get_urls_attach_files() %}
+                  {% if file.image_url %}
+                    <a href="{{file.image_url}}" title="{{file.filename}}" data-gallery="gallery">
+                      <img src="{{ file.image_url_40 }}" class="img-rounded">
+                    </a>
+                  {% else%}
+                    <a href="{{file.link_file}}">
+                      <i class="icon-file  icon-1x"></i> 
+                      {{ file.filename }}
+                    </a>
+                  {% endif%}
+              
+                {% endfor%}
+              </div>
             </td>
             <td class="span1"><a href="tasks/{{task.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
             <td class="span1">
