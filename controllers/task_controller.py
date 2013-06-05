@@ -52,16 +52,30 @@ class EditTaskPage(BaseRequestHandler):
         template_values = {
             "task":Task.get_by_id(int(task_id)),
             "companies":Company.all(),
+            "users":UserInsurance.all(),
         }
         self.generate("task/edit.html", template_values)
 
     def post(self, task_id):
         try:
             company = Company.get_by_id(int(self.request.get("company")))
+
+            users_u =  self.request.get_all("users")
+            users_array = []
+            for user in users_u:
+                users_array.append(UserInsurance.get_by_id(int(user)).user)
+
+            attach_keys =  self.request.get("attach_files").split(",")[0:-1]
+            attach_files = []
+            for key in attach_keys:
+                attach_files.append(BlobInfo.get(key).key())
+
             task = Task.get_by_id(int(task_id))
             task.title = self.request.get("title")
             task.text = self.request.get("text")
             task.company = company
+            task.attach_users = users_array
+            task.attach_files = attach_files
             task.put()
             self.redirect("/tasks/" + str(task.key().id())) 
         except db.BadValueError, errors:

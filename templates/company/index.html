@@ -6,8 +6,10 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th></th>
       <th>email</th>
       <th>atach_users</th>
+      <th>Create by</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +19,16 @@
             <td><a href="/companies/{{ company.key().id()}}">{{ company.name }}</a></td>
             <td><a href="/company/{{ company.key().id()}}/tasks">Show tasks</a></td>
             <td>{{ company.email }}</td>
-            <td class="span1">{{ company.atach_users }}</td>
+            <td class="span3">
+              <ul class="inline">
+              {% for user_attach in company.attach_users %}
+                <li>
+                  <span class="label label-info">{{ user_attach }}</span>
+                </li>
+              {% endfor %}
+              </ul>
+            </td>
+            <td class="span2">{{ company.create_by }}</td>
             <td class="span1"><a href="companies/{{company.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
             <td class="span1">
               <form action="/companies/{{ company.key().id()}}/delete" method="post" class="not_visible">

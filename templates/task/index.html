@@ -22,7 +22,15 @@
             <td><a href="/tasks/{{ task.key().id()}}">{{ task.title }}</a></td>
             <td>{{ task.text }}</td>
             <td>{{ task.company.name }}</td>
-            <td class="span1">{{ task.attach_users }}</td>
+            <td class="span3">
+              <ul class="inline">
+              {% for user_attach in task.attach_users %}
+                <li>
+                  <span class="label label-info">{{ user_attach }}</span>
+                </li>
+              {% endfor %}
+              </ul>
+            </td>
             <td class="span1"><a href="tasks/{{task.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
             <td class="span1">
               <form action="/tasks/{{ task.key().id()}}/delete" method="post" class="not_visible">

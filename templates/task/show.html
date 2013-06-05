@@ -9,7 +9,15 @@
   <dd>{{ task.text }}</dd>
 
   <dt>Attach Users</dt>
-  <dd>{{ task.attach_users }}</dd>
+  <dd>
+    <ul class="inline">
+    {% for user_attach in task.attach_users %}
+      <li>
+        <span class="label label-info">{{ user_attach }}</span>
+      </li>
+    {% endfor %}
+    </ul>
+  </dd>
 
   <dt>Create by</dt>
   <dd>{{ task.create_by }}</dd>
