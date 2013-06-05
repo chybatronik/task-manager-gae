@@ -4,7 +4,7 @@ class AllTaskPage(BaseRequestHandler):
     def get(self):
         tasks = Task.all()
         template_values = {
-            "tasks":tasks,
+            "tasks":tasks
         }
         self.generate("task/index.html", template_values)
 
@@ -13,9 +13,6 @@ class ShowTaskPage(BaseRequestHandler):
         template_values = {
             "task":Task.get_by_id(int(task_id)),
         }
-        print template_values["task"].attach_files
-
-
         self.generate("task/show.html", template_values)
 
 class CreateTaskPage(BaseRequestHandler):
@@ -75,3 +72,12 @@ class DeleteTaskPage(BaseRequestHandler):
         task = Task.get_by_id(int(task_id))
         db.delete(task)
         self.redirect("/tasks") 
+
+class ShowTasksOfCompanyPage(BaseRequestHandler):
+    def get(self, company_id ):
+        company = Company.get_by_id(int(company_id))
+        template_values = {
+            "tasks": Task.all().filter("company = ", company),
+            "company_of":company
+        }
+        self.generate("task/index.html", template_values)

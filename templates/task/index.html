@@ -1,7 +1,11 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
-
+{% if company_of%}
+  <h4> Tasks of {{company_of.name}} </h4>
+{% else %}
+  <h4>  All tasks </h4>
+{% endif%}
 <table class="table table-hover table-striped">
   <thead>
     <tr>

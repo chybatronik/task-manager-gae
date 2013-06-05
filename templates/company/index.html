@@ -15,6 +15,7 @@
       {% for company in companies %}
         <tr>
             <td><a href="/companies/{{ company.key().id()}}">{{ company.name }}</a></td>
+            <td><a href="/company/{{ company.key().id()}}/tasks">Show tasks</a></td>
             <td>{{ company.email }}</td>
             <td class="span1">{{ company.atach_users }}</td>
             <td class="span1"><a href="companies/{{company.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
