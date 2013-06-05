@@ -14,7 +14,7 @@ class LoginTestCase(unittest.TestCase):
     self.testbed.activate()
     self.testbed.init_datastore_v3_stub()
     self.testbed.init_memcache_stub()
-    self.browser = Browser()
+    self.browser = Browser('chrome')
 
   def tearDown(self):
     self.testbed.deactivate()
