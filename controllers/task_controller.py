@@ -35,13 +35,6 @@ class CreateTaskPage(BaseRequestHandler):
             attach_files = []
             for key in attach_keys:
                 attach_files.append(BlobInfo.get(key).key())
-
-            print "attach_files", attach_files
-            print "attach_files", attach_files
-            print "attach_files", attach_files
-            print "attach_files", attach_files
-            print "attach_files", attach_files
-
             users_u =  self.request.get_all("users")
             users_array = []
             for user in users_u:
