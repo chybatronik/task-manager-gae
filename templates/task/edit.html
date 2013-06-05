@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row-fluid">
   <div class="span4">
-    <form class="form-horizontal" action="/tasks/{{ task.key().id() }}/edit" method="post">
+    <form class="form-horizontal" action="/tasks/{{ task.key().id() }}/edit" method="post" id="form_edit">
 
       <div class="control-group">
         <label class="control-label" for="inputTitle">Title</label>
@@ -101,7 +101,7 @@ $("#save").click(function(event) {
     key = $(array[i]).attr("key");
     $("#attach_files").append(key + ",");
   };
-  $("#form_create").submit();
+  $("#form_edit").submit();
 });
 </script>
 
