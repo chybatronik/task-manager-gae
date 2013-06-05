@@ -9,7 +9,15 @@
   <dd>{{ company.email }}</dd>
 
   <dt>Attach Users</dt>
-  <dd>{{ company.atach_users }}</dd>
+  <dd>
+    <ul class="inline">
+    {% for user_attach in company.attach_users %}
+      <li>
+        <span class="label label-info">{{ user_attach }}</span>
+      </li>
+    {% endfor %}
+    </ul>
+  </dd>
 
   <dt>Create by</dt>
   <dd>{{ company.create_by }}</dd>

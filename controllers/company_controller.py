@@ -16,34 +16,47 @@ class ShowCompanyPage(BaseRequestHandler):
         self.generate("company/show.html", template_values)
 
 class CreateCompanyPage(BaseRequestHandler):
-    def get (self, template_values={}):
+    def get (self, errors=None):
+        template_values={
+            "users":UserInsurance.all(),
+            "errors":errors,
+        }
         self.generate("company/new.html", template_values)
 
     def post(self):
         try:
+            users_u =  self.request.get_all("users")
+            users_array = []
+            for user in users_u:
+                users_array.append(UserInsurance.get_by_id(int(user)).user)
+
             com = Company(name = self.request.get("name"), email = self.request.get("email"), 
-                create_by = users.get_current_user()).put()
+                create_by = users.get_current_user(), attach_users = users_array).put()
             self.redirect("/companies/" + str(com.id()))  
         except db.BadValueError, errors:
-            template_values = {
-                "errors":errors,
-            }
-            self.get(template_values)
+            self.get(errors)
 
 class EditCompanyPage(BaseRequestHandler):
     def get(self, company_id, errors=None):
         template_values = {
             "company":Company.get_by_id(int(company_id)),
             "errors": errors,
+            "users":UserInsurance.all(),
         }
 
         self.generate("company/edit.html", template_values)
 
     def post(self, company_id):
         try:
+            users_u =  self.request.get_all("users")
+            users_array = []
+            for user in users_u:
+                users_array.append(UserInsurance.get_by_id(int(user)).user)
+
             com = Company.get_by_id(int(company_id))
             com.name = self.request.get("name")
             com.email = self.request.get("email")
+            com.attach_users = users_array
             com.put()
             self.redirect("/companies/" + str(com.key().id()))
         except db.BadValueError, errors:
