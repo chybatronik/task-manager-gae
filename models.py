@@ -27,7 +27,7 @@ class Company(db.Model):
     name = db.StringProperty(required=True)
     date = db.DateTimeProperty(auto_now_add=True)
     email = db.EmailProperty(required=True, validator=valid_email)
-    atach_users = db.ListProperty(User)
+    attach_users = db.ListProperty(User)
     create_by = db.UserProperty(required=True)
 
 
@@ -35,7 +35,7 @@ class Task(db.Model):
     title = db.StringProperty(required=True)
     text = db.TextProperty()
     is_done = db.BooleanProperty(default=False)
-    atach_users = db.ListProperty(User)
+    attach_users = db.ListProperty(User)
     attach_files = db.ListProperty(blobstore.BlobKey)
     priority = db.RatingProperty()
     date = db.DateTimeProperty(auto_now_add=True)

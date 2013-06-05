@@ -12,7 +12,7 @@
       <th>Title</th>
       <th>Text</th>
       <th>Company</th>
-      <th>atach_users</th>
+      <th>attach_users</th>
     </tr>
   </thead>
   <tbody>
@@ -22,7 +22,7 @@
             <td><a href="/tasks/{{ task.key().id()}}">{{ task.title }}</a></td>
             <td>{{ task.text }}</td>
             <td>{{ task.company.name }}</td>
-            <td class="span1">{{ task.atach_users }}</td>
+            <td class="span1">{{ task.attach_users }}</td>
             <td class="span1"><a href="tasks/{{task.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
             <td class="span1">
               <form action="/tasks/{{ task.key().id()}}/delete" method="post" class="not_visible">

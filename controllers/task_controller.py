@@ -41,7 +41,7 @@ class CreateTaskPage(BaseRequestHandler):
                         text = self.request.get("text"), 
                         create_by = users.get_current_user(), 
                         company = company, 
-                        atach_users = users_array,
+                        attach_users = users_array,
                         attach_files = attach_files).put()
             self.redirect("/tasks/" + str(task.id()))  
         except db.BadValueError, errors:
