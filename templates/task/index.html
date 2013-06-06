@@ -58,12 +58,7 @@
             </td>
             
             <td>{{ task.create_by }}</td>
-            <td class="span1"><a href="tasks/{{task.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
-            <td class="span1">
-              <form action="/tasks/{{ task.key().id()}}/delete" method="post" class="not_visible">
-                <button type="submit" class="btn btn-mini delete">Delete</button>
-              </form>       
-            </td>
+            <td class="span1"><a href="tasks/{{task.key().id()}}/edit" class="btn btn-info"><i class="icon-edit"></i>Edit</a></td>
         </tr>
       {% endfor %}
     

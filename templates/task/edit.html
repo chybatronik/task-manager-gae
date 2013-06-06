@@ -1,7 +1,6 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
-
 <div class="row-fluid">
   <div class="span6 offset1">
     <form action="/tasks/{{ task.key().id() }}/edit" method="post" id="form_edit">
@@ -35,12 +34,6 @@
         <label class="control-label" for="inputusers">Attach files</label>
         <div class="controls">
           <textarea id="attach_files" name="attach_files"></textarea>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <div class="controls">
-          <button type="submit" id="save" class="btn btn-large btn-primary">Save</button>
         </div>
       </div>
     </form>
@@ -89,6 +82,18 @@
   </div>
 </div>
 
+<dic class="row">
+  <ul class="inline" >
+    <li>
+      <form action="/tasks/{{ task.key().id()}}/delete" method="post" class="not_visible">
+        <button type="submit" class="btn btn-large btn-danger delete">Delete</button>
+      </form>
+    </li>
+    <li style="margin-left:40px">
+      <button type="submit" id="save" class="btn btn-large btn-primary">Save</button>
+    </li>
+  
+</div>
 <script>
 // add uploading files into form
 $("#save").click(function(event) {

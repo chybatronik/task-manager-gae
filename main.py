@@ -7,7 +7,6 @@ from seed import *
 
 _DEBUG = True
 
-
 class IndexPage(BaseRequestHandler):
 
     def get(self):

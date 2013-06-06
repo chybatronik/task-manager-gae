@@ -1,4 +1,5 @@
 from base_controller import *
+from time import sleep
 
 class AllTaskPage(BaseRequestHandler):
     def get(self):
@@ -77,8 +78,8 @@ class EditTaskPage(BaseRequestHandler):
 class DeleteTaskPage(BaseRequestHandler):
     def post(self, task_id):
         task = Task.get_by_id(int(task_id))
-        db.delete(task)
-        self.redirect("/tasks") 
+        task.delete()
+        self.redirect("/tasks?refresh", True) 
 
 class DeleteBlobFromTask(BaseRequestHandler):
     def post(self, task_id, key_blob):

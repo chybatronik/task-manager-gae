@@ -10,3 +10,9 @@
 dl dd{
     margin-bottom:20px;
 }
+
+.affix {
+    position: fixed; 
+    bottom: 60px; 
+    left: 120px;
+}

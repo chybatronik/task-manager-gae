@@ -1,4 +1,6 @@
 when delete task or company user ajax
+when delete task delete blob files
 user has avatar
 improve split " " or "." text task button less more
 attach files near title task
+hide show list attach on edit page
