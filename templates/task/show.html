@@ -27,12 +27,15 @@
 
 
     <dt>files</dt>
-      <div id="gallery" role="presentation" class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+    <dd>
+      <ul class="gallery clearfix">
         {% for file in task.get_urls_attach_files() %}
           {% if file.image_url %}
-            <a href="{{file.image_url}}" title="{{file.filename}}" data-gallery="gallery">
+          <li>
+            <a href="{{file.image_url}}"  rel="prettyPhoto[gallery1]"  title="{{file.filename}}">
               <img src="{{ file.image_url_200 }}" class="img-rounded">
             </a>
+          </li>
           {% else%}
             <a href="{{file.link_file}}">
               <i class="icon-file  icon-3x"></i> 
@@ -41,8 +44,8 @@
           {% endif%}
       
         {% endfor%}
-      </div>
-  </dl>
+      </ul>
+  </dd>
 </div>
 <div class="row">
   <div class="span8 offset2">
@@ -51,4 +54,9 @@
   </div>
 </div>
 
+<script type="text/javascript" charset="utf-8">
+      $(document).ready(function(){
+        $("a[rel^='prettyPhoto']").prettyPhoto();
+      });
+</script>
 {% endblock %}
