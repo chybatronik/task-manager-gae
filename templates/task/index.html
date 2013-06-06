@@ -11,7 +11,6 @@
     <tr>
       <th>Title</th>
       <th>Text</th>
-      <th>Company</th>
       <th>attach_users</th>
       <th>attach_files</th>
     </tr>
@@ -22,7 +21,6 @@
         <tr>
             <td><a href="/tasks/{{ task.key().id()}}">{{ task.title }}</a></td>
             <td>{{ task.text }}</td>
-            <td>{{ task.company.name }}</td>
             <td class="span3">
               <ul class="inline">
               {% for user_attach in task.attach_users %}

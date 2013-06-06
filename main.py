@@ -30,7 +30,7 @@ application = webapp2.WSGIApplication([
     ('/tasks/(\d+)', ShowTaskPage),
     ('/tasks/(\d+)/edit', EditTaskPage),
     ('/tasks/(\d+)/delete', DeleteTaskPage),
-    ('/company/(\d+)/tasks', ShowTasksOfCompanyPage),
+    #('/company/(\d+)/tasks', ShowTasksOfCompanyPage),
 
     ('/users', AllUserInsurancePage),
     ('/users/(\d+)', ShowUserInsurancePage),

@@ -26,7 +26,7 @@ class CreateTaskPage(BaseRequestHandler):
 
     def post(self):
         try:
-            company = Company.get_by_id(int(self.request.get("company")))
+            #company = Company.get_by_id(int(self.request.get("company")))
 
             attach_keys =  self.request.get("attach_files").split(",")[0:-1]
             attach_files = []
@@ -40,7 +40,7 @@ class CreateTaskPage(BaseRequestHandler):
             task = Task(title = self.request.get("title"), 
                         text = self.request.get("text"), 
                         create_by = users.get_current_user(), 
-                        company = company, 
+                        #company = company, 
                         attach_users = users_array,
                         attach_files = attach_files).put()
             self.redirect("/tasks/" + str(task.id()))  
@@ -58,7 +58,7 @@ class EditTaskPage(BaseRequestHandler):
 
     def post(self, task_id):
         try:
-            company = Company.get_by_id(int(self.request.get("company")))
+            #company = Company.get_by_id(int(self.request.get("company")))
 
             users_u =  self.request.get_all("users")
             users_array = []
@@ -73,7 +73,7 @@ class EditTaskPage(BaseRequestHandler):
             task = Task.get_by_id(int(task_id))
             task.title = self.request.get("title")
             task.text = self.request.get("text")
-            task.company = company
+            #task.company = company
             task.attach_users = users_array
             task.attach_files = task.attach_files + attach_files
             task.put()
@@ -87,11 +87,11 @@ class DeleteTaskPage(BaseRequestHandler):
         db.delete(task)
         self.redirect("/tasks") 
 
-class ShowTasksOfCompanyPage(BaseRequestHandler):
-    def get(self, company_id ):
-        company = Company.get_by_id(int(company_id))
-        template_values = {
-            "tasks": Task.all().filter("company = ", company),
-            "company_of":company
-        }
-        self.generate("task/index.html", template_values)
+# class ShowTasksOfCompanyPage(BaseRequestHandler):
+#     def get(self, company_id ):
+#         company = Company.get_by_id(int(company_id))
+#         template_values = {
+#             "tasks": Task.all().filter("company = ", company),
+#             "company_of":company
+#         }
+#         self.generate("task/index.html", template_values)

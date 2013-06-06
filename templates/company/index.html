@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th></th>
       <th>email</th>
       <th>atach_users</th>
       <th>Create by</th>
@@ -17,7 +16,6 @@
       {% for company in companies %}
         <tr>
             <td><a href="/companies/{{ company.key().id()}}">{{ company.name }}</a></td>
-            <td><a href="/company/{{ company.key().id()}}/tasks">Show tasks</a></td>
             <td>{{ company.email }}</td>
             <td class="span3">
               <ul class="inline">
