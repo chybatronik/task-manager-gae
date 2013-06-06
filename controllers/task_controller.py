@@ -79,7 +79,7 @@ class DeleteTaskPage(BaseRequestHandler):
     def post(self, task_id):
         task = Task.get_by_id(int(task_id))
         task.delete()
-        self.redirect("/tasks?refresh", True) 
+        self.redirect("/tasks") 
 
 class DeleteBlobFromTask(BaseRequestHandler):
     def post(self, task_id, key_blob):

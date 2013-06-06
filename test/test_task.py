@@ -63,6 +63,15 @@ class TaskTestCase(unittest.TestCase):
     self.assertEqual(user1, Task.all().fetch(1)[0].attach_users[0])
     self.assertEqual(user2, Task.all().fetch(1)[0].attach_users[1])
 
+  def test_delete_Task(self):
+    user1 = User(email = "test1@foo.com")
+    task1 = Task(title = "Name", create_by= user1, attach_users = [user1])
+    task1.put()
+    self.assertEqual(1, len(Task.all().fetch(10)))
+    task1.delete()
+    self.assertEqual(0, len(Task.all().fetch(10)))
+
+
   # def test_find_task_company(self):
   #   user1 = User(email = "test1@foo.com")
   #   user2 = User(email = "test2@foo.com")
