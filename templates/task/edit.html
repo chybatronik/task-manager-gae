@@ -48,7 +48,7 @@
 
   <div class="span5">
     <div class="row">
-      <ul class="unstyled">
+      <ul class="unstyled span7">
         {% for file in task.get_urls_attach_files() %}
           <li style="margin-bottom:10px">
           {% if file.image_url %}
@@ -66,7 +66,7 @@
               </li>
             </ul>             
           {% else%}
-            <ul class="inline" style="margin-left:7.5em">
+            <ul class="inline" >
               <li>
                 <a href="{{file.link_file}}">
                   <i class="icon-file  icon-3x"></i> 
