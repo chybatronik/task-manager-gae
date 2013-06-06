@@ -40,8 +40,19 @@ class Task(db.Model):
     priority = db.RatingProperty()
     date = db.DateTimeProperty(auto_now_add=True)
     create_by = db.UserProperty(required=True)
-    #company = db.ReferenceProperty(Company, required=True)
 
+    def lm_text(self):
+        if len(self.text) > 120:
+            begin = self.text[0:120]
+            end = self.text[120:-1]
+            my_id = self.key().id()
+            result = '''<div class="muted" style="margin-left:20px">''' + begin
+            result += '''<a id="more_my_id" class="more" href=""> ... more  </a>
+<div id="hidde_more_my_id" class="hidden"> '''.replace("my_id", str(my_id))
+            result += end + '''<a id="less_more_my_id" class="less" href="">  less  </a></div></div>'''.replace("my_id", str(my_id))
+            return result
+        else:
+            return self.text
     def get_urls_attach_files(self):
         result = []
         for key in self.attach_files:

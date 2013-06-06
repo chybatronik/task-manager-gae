@@ -6,6 +6,7 @@
 {% else %}
   <h4>  All tasks </h4>
 {% endif%}
+
 <table class="table table-hover table-striped">
   <thead>
     <tr>
@@ -22,7 +23,7 @@
             <td class="span7"><a href="/tasks/{{ task.key().id()}}"><h5>{{ task.title }}</h5></a>
               <p class="muted" style="margin-left:20px">
                 <small>
-                  {{ task.text }}
+                  {{ task.lm_text() }}
                 </small>
               </p>
             </td>
@@ -66,4 +67,25 @@
 </table>
 
 <a class="btn btn-info" href="/tasks/create">Create new task</a>
+
+<script>
+$('document').ready(function() {
+  $(".more").click(function(event) {
+    event.preventDefault();
+    $("#hidde_" + $(event.target).attr("id")).removeClass("hidden")
+    $("#"+$(event.target).attr("id")).hide()
+    $("#less_" + $(event.target).attr("id")).show()
+  });
+
+   $(".less").click(function(event) {
+    event.preventDefault();
+    var id = $(event.target).attr("id").replace("less_", "")
+    console.log("#hidde_" + id)
+    $("#hidde_" + id).addClass("hidden")
+    $("#"+id).show()
+    $("#less_" + id).hide()
+  });
+});
+</script>
+
 {% endblock %}
