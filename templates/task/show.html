@@ -1,47 +1,54 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
-<dl class="dl-horizontal">
-  <dt>Name</dt>
-  <dd>{{ task.title }}</dd>
+<div class="row">
+  <dl class="dl-horizontal span7">
+    <dt>Name</dt>
+    <dd ><strong>{{ task.title }}</strong></dd>
 
-  <dt>Email</dt>
-  <dd>{{ task.text }}</dd>
+    <dt>Text</dt>
+    <dd>
+      {{ task.text }}
+    </dd>
 
-  <dt>Attach Users</dt>
-  <dd>
-    <ul class="inline">
-    {% for user_attach in task.attach_users %}
-      <li>
-        <span class="label label-info">{{ user_attach }}</span>
-      </li>
-    {% endfor %}
-    </ul>
-  </dd>
+    <dt>Attach Users</dt>
+    <dd>
+      <ul class="inline">
+      {% for user_attach in task.attach_users %}
+        <li>
+          <span class="label label-info">{{ user_attach }}</span>
+        </li>
+      {% endfor %}
+      </ul>
+    </dd>
 
-  <dt>Create by</dt>
-  <dd>{{ task.create_by }}</dd>
+    <dt>Create by</dt>
+    <dd>{{ task.create_by }}</dd>
 
 
-  <dt>files</dt>
-    <div id="gallery" role="presentation" class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
-      {% for file in task.get_urls_attach_files() %}
-        {% if file.image_url %}
-          <a href="{{file.image_url}}" title="{{file.filename}}" data-gallery="gallery">
-            <img src="{{ file.image_url_200 }}" class="img-rounded">
-          </a>
-        {% else%}
-          <a href="{{file.link_file}}">
-            <i class="icon-file  icon-3x"></i> 
-            {{ file.filename }}
-          </a>
-        {% endif%}
-    
-      {% endfor%}
-    </div>
-</dl>
-
-<a class="btn btn-info" href="/tasks/{{ task.key().id() }}/edit">Edit</a>
-<a class="btn btn-info" href="/tasks">All</a>
+    <dt>files</dt>
+      <div id="gallery" role="presentation" class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+        {% for file in task.get_urls_attach_files() %}
+          {% if file.image_url %}
+            <a href="{{file.image_url}}" title="{{file.filename}}" data-gallery="gallery">
+              <img src="{{ file.image_url_200 }}" class="img-rounded">
+            </a>
+          {% else%}
+            <a href="{{file.link_file}}">
+              <i class="icon-file  icon-3x"></i> 
+              {{ file.filename }}
+            </a>
+          {% endif%}
+      
+        {% endfor%}
+      </div>
+  </dl>
+</div>
+<div class="row">
+  <div class="span8 offset2">
+    <a class="btn btn-info" href="/tasks/{{ task.key().id() }}/edit">Edit</a>
+    <a class="btn btn-info" href="/tasks">All</a>
+  </div>
+</div>
 
 {% endblock %}

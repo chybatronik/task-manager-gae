@@ -10,7 +10,6 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Text</th>
       <th>attach_users</th>
       <th>attach_files</th>
       <th>create_by</th>
@@ -20,8 +19,13 @@
     
       {% for task in tasks %}
         <tr>
-            <td><a href="/tasks/{{ task.key().id()}}">{{ task.title }}</a></td>
-            <td>{{ task.text }}</td>
+            <td class="span7"><a href="/tasks/{{ task.key().id()}}"><h5>{{ task.title }}</h5></a>
+              <p class="muted" style="margin-left:20px">
+                <small>
+                  {{ task.text }}
+                </small>
+              </p>
+            </td>
             <td class="span3">
               <ul class="inline">
               {% for user_attach in task.attach_users %}
