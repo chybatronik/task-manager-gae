@@ -13,6 +13,7 @@
       <th>Text</th>
       <th>attach_users</th>
       <th>attach_files</th>
+      <th>create_by</th>
     </tr>
   </thead>
   <tbody>
@@ -47,6 +48,7 @@
                 {% endfor%}
               </div>
             </td>
+            <td>{{ task.create_by }}</td>
             <td class="span1"><a href="tasks/{{task.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
             <td class="span1">
               <form action="/tasks/{{ task.key().id()}}/delete" method="post" class="not_visible">

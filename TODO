@@ -1,5 +1,6 @@
-remove relationship between task and company
 seed file
 show image must be good
 company render attach users, attach files
 bug don't remove files
+when delete task or company user ajax
+user has avatar

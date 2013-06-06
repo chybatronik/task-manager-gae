@@ -20,17 +20,6 @@
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="inputcompany">Company</label>
-        <div class="controls">
-          <select name="company" id="inputcompany">
-            {% for company in companies %}
-              <option value="{{company.key().id()}}">{{company.name}}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-
-      <div class="control-group">
         <label class="control-label" for="inputusers">Attach users</label>
         <div class="controls">
           <select name="users" id="inputusers" multiple="multiple">

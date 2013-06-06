@@ -3,6 +3,7 @@ from controllers.company_controller import *
 from controllers.task_controller import *
 from controllers.user_controller import *
 from controllers.file_controller import *
+from seed import *
 
 _DEBUG = True
 
@@ -36,6 +37,8 @@ application = webapp2.WSGIApplication([
     ('/users/(\d+)', ShowUserInsurancePage),
     ('/users/invite', InviteUserInsurancePage),
     ('/users/(\d+)/delete', DeleteUserInsurancePage),
+
+    ('/seed_data', SeedPage),
 
     ('/uploads', UploadHandler),
     ('/server', DownloadHandler)

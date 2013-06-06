@@ -7,6 +7,7 @@ from google.appengine.ext import blobstore
 
 import jinja2
 import webapp2
+
 from models import *
 
 _DEBUG = True
