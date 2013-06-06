@@ -28,7 +28,7 @@
 
     <dt>files</dt>
     <dd>
-      <ul class="gallery clearfix">
+      <ul class="gallery clearfix inline">
         {% for file in task.get_urls_attach_files() %}
           {% if file.image_url %}
           <li>
@@ -56,7 +56,7 @@
 
 <script type="text/javascript" charset="utf-8">
       $(document).ready(function(){
-        $("a[rel^='prettyPhoto']").prettyPhoto();
+        $("a[rel^='prettyPhoto']").prettyPhoto({social_tools:false});
       });
 </script>
 {% endblock %}

@@ -43,14 +43,14 @@
           <table>
           {% for file in task.get_urls_attach_files() %}
             {% if file.image_url %}
-            <tr>
+              <tr>
                 <td>
-                  <a href="{{file.image_url}}" title="{{file.filename}}" data-gallery="gallery">
+                  <a href="{{file.image_url}}" title="{{file.filename}}">
                     <img src="{{ file.image_url_200 }}" class="img-rounded">
                   </a>
                 </td>
                 <td>
-                  <button class="btn btn-danger delete" data-type="DELETE" data-url="{{ request.host_url + file.delete_url }}">
+                  <button class="btn btn-danger delete" data-type="DELETE" data-url="{{ request.host_url + file.delete_url }}"  style="margin-left:20px">
                     <i class="icon-trash icon-white"></i>
                   </button>
                 </td>

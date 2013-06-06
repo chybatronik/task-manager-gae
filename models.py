@@ -62,7 +62,7 @@ class Task(db.Model):
             if filename.lower().endswith(extensionsToCheck):                
                 image_url_200 = get_serving_url(key, 200)
                 image_url_40 = get_serving_url(key, 40)
-                image_url = get_serving_url(key)
+                image_url = get_serving_url(key, 1200)
             else:
                 image_url = None
                 image_url_200 = None
