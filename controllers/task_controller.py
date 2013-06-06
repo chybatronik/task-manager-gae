@@ -3,7 +3,7 @@ from time import sleep
 
 class AllTaskPage(BaseRequestHandler):
     def get(self):
-        tasks = Task.all()
+        tasks = Task.all().order('-create_by')
         template_values = {
             "tasks":tasks
         }

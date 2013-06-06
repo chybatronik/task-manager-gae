@@ -1,3 +1,4 @@
+try ndb module
 when delete task or company user ajax
 when delete task delete blob files
 user has avatar
