@@ -73,6 +73,7 @@ class Task(db.Model):
                 "image_url_40":image_url_40,
                 "image_url":image_url,
                 "filename":filename,
+                "key":str(key),
                 "link_file":"/server?key="+str(key),
                 "delete_url":'/uploads?key=' + str(key)
             }

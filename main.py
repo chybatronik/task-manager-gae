@@ -31,6 +31,7 @@ application = webapp2.WSGIApplication([
     ('/tasks/(\d+)', ShowTaskPage),
     ('/tasks/(\d+)/edit', EditTaskPage),
     ('/tasks/(\d+)/delete', DeleteTaskPage),
+    ('/tasks/(\d+)/blob/(.*)/delete', DeleteBlobFromTask),
     #('/company/(\d+)/tasks', ShowTasksOfCompanyPage),
 
     ('/users', AllUserInsurancePage),

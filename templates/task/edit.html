@@ -1,21 +1,22 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
+
 <div class="row-fluid">
-  <div class="span4">
-    <form class="form-horizontal" action="/tasks/{{ task.key().id() }}/edit" method="post" id="form_edit">
+  <div class="span6 offset1">
+    <form action="/tasks/{{ task.key().id() }}/edit" method="post" id="form_edit">
 
       <div class="control-group">
         <label class="control-label" for="inputTitle">Title</label>
         <div class="controls">
-          <input type="text" name="title" id="inputTitle" placeholder="Title" value="{{ task.title }}">
+          <input type="text"  class="span8" name="title" id="inputTitle" placeholder="Title" value="{{ task.title }}">
         </div>
       </div>
 
       <div class="control-group">
         <label class="control-label" for="inputText">Text</label>
         <div class="controls">
-          <textarea rows="3" name="text" id="inputText" placeholder="Text">{{ task.text }}</textarea>
+          <textarea rows="12" class="span8" name="text" id="inputText" placeholder="Text">{{ task.text }}</textarea>
         </div>
       </div>
       
@@ -38,45 +39,53 @@
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="inputusers">Attach files</label>
         <div class="controls">
-          <table>
-          {% for file in task.get_urls_attach_files() %}
-            {% if file.image_url %}
-              <tr>
-                <td>
-                  <a href="{{file.image_url}}" title="{{file.filename}}">
-                    <img src="{{ file.image_url_200 }}" class="img-rounded">
-                  </a>
-                </td>
-                <td>
-                  <button class="btn btn-danger delete" data-type="DELETE" data-url="{{ request.host_url + file.delete_url }}"  style="margin-left:20px">
-                    <i class="icon-trash icon-white"></i>
-                  </button>
-                </td>
-              </tr>
-
-            {% else%}
-              <a href="{{file.link_file}}">
-                <i class="icon-file  icon-3x"></i> 
-                {{ file.filename }}
-              </a>
-            {% endif%}
-        
-          {% endfor%}
-        </table>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <div class="controls">
-          <button type="submit" id="save" class="btn">Save</button>
+          <button type="submit" id="save" class="btn btn-large btn-primary">Save</button>
         </div>
       </div>
     </form>
   </div>
-  <div class="span7 offset1">
-    {% include 'files/upload.html' %}
+
+  <div class="span5">
+    <div class="row">
+      <ul class="unstyled">
+        {% for file in task.get_urls_attach_files() %}
+          <li style="margin-bottom:10px">
+          {% if file.image_url %}
+          
+            <ul class="inline">
+              <li>
+                <a href="{{file.image_url}}" title="{{file.filename}}">
+                  <img src="{{ file.image_url_200 }}" class="img-rounded">
+                </a>
+              </li>
+              <li>
+                <form action="/tasks/{{ task.key().id()}}/blob/{{file.key}}/delete" method="post" class="not_visible">
+                  <button type="submit" class="btn btn-mini btn-danger delete"><i class="icon-trash icon-white"></i></button>
+                </form>  
+              </li>
+            </ul>             
+          {% else%}
+            <ul class="inline" style="margin-left:7.5em">
+              <li>
+                <a href="{{file.link_file}}">
+                  <i class="icon-file  icon-3x"></i> 
+                  {{ file.filename }}
+                </a>
+              </li>
+              <li> 
+                  <form action="/tasks/{{ task.key().id()}}/blob/{{file.key}}/delete" method="post" class="not_visible">
+                  <button type="submit" class="btn btn-mini btn-danger delete"><i class="icon-trash icon-white"></i></button>
+                </form>  
+              <li>
+          {% endif%}
+          </li>
+        {% endfor%}
+      </ul>
+    </div>
+    <div class="row" style="margin-top:30px">
+      {% include 'files/upload.html' %}
+    </div>
   </div>
 </div>
 

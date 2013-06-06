@@ -80,6 +80,16 @@ class DeleteTaskPage(BaseRequestHandler):
         db.delete(task)
         self.redirect("/tasks") 
 
+class DeleteBlobFromTask(BaseRequestHandler):
+    def post(self, task_id, key_blob):
+        task = Task.get_by_id(int(task_id))
+        list_blob_files = task.attach_files
+
+        task.attach_files = [file_key for file_key in list_blob_files if BlobInfo.get(key_blob).key() != file_key]
+        task.put()
+        blobstore.delete(key_blob)
+        self.redirect("/tasks/" + str(task_id) + "/edit") 
+
 # class ShowTasksOfCompanyPage(BaseRequestHandler):
 #     def get(self, company_id ):
 #         company = Company.get_by_id(int(company_id))
