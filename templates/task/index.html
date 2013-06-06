@@ -10,9 +10,9 @@
 <table class="table table-hover table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>attach_users</th>
+      <th>Title/Text</th>
       <th>attach_files</th>
+      <th>attach_users</th>      
       <th>create_by</th>
     </tr>
   </thead>
@@ -26,15 +26,6 @@
                   {{ task.lm_text() }}
                 </small>
               </p>
-            </td>
-            <td class="span3">
-              <ul class="inline">
-              {% for user_attach in task.attach_users %}
-                <li>
-                  <span class="label label-info">{{ user_attach }}</span>
-                </li>
-              {% endfor %}
-              </ul>
             </td>
             <td class="span5">
               <ul  class="gallery clearfix inline">
@@ -55,6 +46,17 @@
                 {% endfor%}
               </div>
             </td>
+            
+            <td class="span3">
+              <ul class="inline">
+              {% for user_attach in task.attach_users %}
+                <li>
+                  <span class="label label-info">{{ user_attach }}</span>
+                </li>
+              {% endfor %}
+              </ul>
+            </td>
+            
             <td>{{ task.create_by }}</td>
             <td class="span1"><a href="tasks/{{task.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
             <td class="span1">
