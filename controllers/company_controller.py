@@ -66,5 +66,6 @@ class EditCompanyPage(BaseRequestHandler):
 class DeleteCompanyPage(BaseRequestHandler):
     def post(self, company_id):
         com = Company.get_by_id(int(company_id))
-        db.delete(com)
+        com.delete()
+        db.delete(com.key())
         self.redirect("/companies")

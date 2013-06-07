@@ -13,35 +13,44 @@ class SeedPage(BaseRequestHandler):
             return True
         users = UserInsurance.all()
         for user in users:
-            db.delete(user) 
+            user.delete()
+            db.delete(user.key()) 
 
         companies = Company.all()
         for company in companies:
-            db.delete(company) 
+            company.delete()
+            db.delete(company.key()) 
 
         tasks = Task.all()
         for task in tasks:
-            db.delete(task) 
+            task.delete()
+            db.delete(task.key()) 
 
         #create new instance
 
         user = User(email="test@example.com")
-        user_insurance = UserInsurance(user=user).put()
+        user_insurance = UserInsurance(user=user)
+        db.put(user_insurance)
 
         user2 = User(email="test2@example.com")
-        user_insurance2 = UserInsurance(user=user2).put()
+        user_insurance2 = UserInsurance(user=user2)
+        db.put(user_insurance2)
 
         user3 = User(email="test3@example.com")
-        user_insurance2 = UserInsurance(user=user3).put()
+        user_insurance3 = UserInsurance(user=user3)
+        db.put(user_insurance3)
 
         company1 = Company(name = "A-Z Group Ltd", create_by= user, email="Ltd@Group.com")
         company1.put()
+        db.put(company1)
 
         company2 = Company(name = "The Albany Engineering Co Ltd  ", create_by= user2, email="Albany@Engineering.com")
         company2.put()
+        db.put(company2)
 
         company3 = Company(name = "Alcoa Europe  ", create_by= user3, email="Alcoa@Europe.com")
         company3.put()
+        db.put(company3)
 
         Task(title = "Name tasks 1",
             text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",  

@@ -3,7 +3,7 @@ from time import sleep
 
 class AllTaskPage(BaseRequestHandler):
     def get(self):
-        tasks = Task.all().order('-create_by')
+        tasks = Task.all().order('-create_by').run()
         template_values = {
             "tasks":tasks
         }
@@ -79,6 +79,15 @@ class DeleteTaskPage(BaseRequestHandler):
     def post(self, task_id):
         task = Task.get_by_id(int(task_id))
         task.delete()
+        db.delete(task.key())
+
+        print task.is_saved()
+        print task.is_saved()
+        print task.is_saved()
+        print task.is_saved()
+        print task.is_saved()
+        print task.is_saved()
+        print task.is_saved()
         self.redirect("/tasks") 
 
 class DeleteBlobFromTask(BaseRequestHandler):

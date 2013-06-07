@@ -2,7 +2,8 @@ from base_controller import *
 
 class AllUserInsurancePage(BaseRequestHandler):
     def get(self):
-        users = UserInsurance.all()
+        rpc = db.create_rpc(deadline=1, read_policy=db.STRONG_CONSISTENCY)
+        users = UserInsurance.all().fetch(10, rpc=rpc)
         template_values = {
             "users":users,
         }
@@ -19,7 +20,8 @@ class InviteUserInsurancePage(BaseRequestHandler):
     def post(self):
         try:
             user = users.User(email=self.request.get("email"))
-            user_insurance = UserInsurance(user=user).put()
+            user_insurance = UserInsurance(user=user)
+            db.put(user_insurance)
             self.redirect("/users")
         except db.BadValueError, errors:
             self.get(errors)
@@ -34,5 +36,6 @@ class ShowUserInsurancePage(BaseRequestHandler):
 class DeleteUserInsurancePage(BaseRequestHandler):
     def post(self, user_id):
         user_insurance = UserInsurance.get_by_id(int(user_id))
-        db.delete(user_insurance)
+        user_insurance.delete()
+        db.delete(user_insurance.key())
         self.redirect("/users")
