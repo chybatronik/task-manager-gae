@@ -31,7 +31,9 @@ class CreateCompanyPage(BaseRequestHandler):
                 users_array.append(UserInsurance.get_by_id(int(user)).user)
 
             com = Company(name = self.request.get("name"), email = self.request.get("email"), 
-                create_by = users.get_current_user(), attach_users = users_array).put()
+                create_by = users.get_current_user(), attach_users = users_array)
+            com.put()
+            db.put(com)
             self.redirect("/companies/" + str(com.id()))  
         except db.BadValueError, errors:
             self.get(errors)
@@ -58,6 +60,7 @@ class EditCompanyPage(BaseRequestHandler):
             com.email = self.request.get("email")
             com.attach_users = users_array
             com.put()
+            db.put(com)
             self.redirect("/companies/" + str(com.key().id()))
         except db.BadValueError, errors:
             self.get(int(company_id), errors)

@@ -39,7 +39,9 @@ class CreateTaskPage(BaseRequestHandler):
                         text = self.request.get("text"), 
                         create_by = users.get_current_user(), 
                         attach_users = users_array,
-                        attach_files = attach_files).put()
+                        attach_files = attach_files)
+            task.put()
+            db.put(task)
             self.redirect("/tasks/" + str(task.id()))  
         except db.BadValueError, errors:
             self.get(errors)
@@ -70,6 +72,7 @@ class EditTaskPage(BaseRequestHandler):
             task.attach_users = users_array
             task.attach_files = task.attach_files + attach_files
             task.put()
+            db.put(task)
             self.redirect("/tasks/" + str(task.key().id())) 
         except db.BadValueError, errors:
             self.get(int(task_id), errors)
@@ -93,5 +96,6 @@ class DeleteBlobFromTask(BaseRequestHandler):
 
         task.attach_files = [file_key for file_key in list_blob_files if BlobInfo.get(key_blob).key() != file_key]
         task.put()
+        db.put(task)
         blobstore.delete(key_blob)
         self.redirect("/tasks/" + str(task_id) + "/edit") 
