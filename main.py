@@ -31,10 +31,10 @@ application = webapp2.WSGIApplication([
     ('/tasks/(\d+)/edit', EditTaskPage),
     ('/tasks/(\d+)/delete', DeleteTaskPage),
     ('/tasks/(\d+)/blob/(.*)/delete', DeleteBlobFromTask),
-    #('/company/(\d+)/tasks', ShowTasksOfCompanyPage),
 
     ('/users', AllUserInsurancePage),
     ('/users/(\d+)', ShowUserInsurancePage),
+    ('/users/(\d+)/edit', EditUserInsurancePage),
     ('/users/invite', InviteUserInsurancePage),
     ('/users/(\d+)/delete', DeleteUserInsurancePage),
 

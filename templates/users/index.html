@@ -7,8 +7,9 @@
     
       {% for user in users %}
         <tr>
-            <td class="span2"><a href="/users/{{ user.key().id()}}">{{ user.user.email() }}</a></td>
-            <td class="span2">{{ user.user.nickname() }}</td>
+            <td ><a href="/users/{{ user.key().id()}}">{{ user.user.email() }}</a></td>
+            <td >{{ user.user.nickname() }}</td>
+             <td class="span1"><a href="users/{{user.key().id()}}/edit" class="btn btn-mini">Edit</a></td>
             <td class="span1">
               <form action="/users/{{ user.key().id()}}/delete" method="post" class="not_visible">
                 <button type="submit" class="btn btn-mini delete">Delete</button>

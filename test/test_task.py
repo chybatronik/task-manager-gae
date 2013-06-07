@@ -28,7 +28,7 @@ class TaskTestCase(unittest.TestCase):
     task2 = Task(title = "Name", create_by= user)
     task2.put()
 
-    self.assertEqual(2, len(Task.all().fetch(2)))
+    self.assertEqual(2, len(Task.all().fetch(22)))
 
   def test_without_name_Task(self):  
     user = User(email = "test@foo.com")

@@ -25,7 +25,7 @@ class CompanyTestCase(unittest.TestCase):
     company2 = Company(name = "Name", create_by= user, email="asdd@asdasd.com")
     company2.put()
 
-    self.assertEqual(2, len(Company.all().fetch(2)))
+    self.assertEqual(2, len(Company.all().fetch(22)))
 
   def test_without_name_Company(self):  
     user = User(email = "test@foo.com")
@@ -38,7 +38,7 @@ class CompanyTestCase(unittest.TestCase):
     user = User(email = "test@foo.com")
     Company(name = "qwe", create_by= user, email="asdd@asdasd.com").put()
 
-    self.assertEqual(1, len(Company.all().fetch(2)))
+    self.assertEqual(1, len(Company.all().fetch(22)))
 
   def test_datetime_Company(self):
     user = User(email = "test@foo.com")

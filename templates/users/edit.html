@@ -1,0 +1,55 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<form class="form-horizontal" action="/users/{{user_insurance.key().id()}}/edit" method="post" enctype="multipart/form-data" >
+
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+      <input type="text" name="email" id="inputEmail" placeholder="Email" value="{{ user_insurance.user.email() }}">
+    </div>
+  </div>  
+
+
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Save</button>
+    </div>
+  </div>
+</form>
+
+  <div class="control-group">
+    <label class="control-label" for="inputAvatar">Avatar</label>
+    <div class="controls">
+      <input id="fileupload" type="file" name="files[]" multiple="">
+    </div>
+  </div>
+  <div id="progress" class="progress progress-success progress-striped">
+        <div class="bar"></div>
+    </div>
+    <!-- The container for the uploaded files -->
+    <div id="files" class="files"></div>
+<script>
+$('document').ready(function() {
+
+    $('#fileupload').fileupload({
+        url: "/uploads",
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo('#files');
+            });
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
+});
+</script>
+
+{% endblock %}

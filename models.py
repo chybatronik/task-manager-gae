@@ -83,3 +83,7 @@ class Task(db.Model):
 
 class UserInsurance(db.Model):
     user = db.UserProperty(required=True)
+    avatar = db.BlobProperty()
+
+    def get_avatar(self):
+        return "URL"

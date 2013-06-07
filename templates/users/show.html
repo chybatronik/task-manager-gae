@@ -7,7 +7,11 @@
 
   <dt>Email</dt>
   <dd>{{ user_insurance.user.email() }}</dd>
-
+    
+{% if user_insurance.avatar %}
+  <dt>Avatar</dt>
+  <dd>{{ user_insurance.get_avatar()}}</dd
+{% endif %}
 </dl>
 
 <a class="btn btn-info" href="/users">All</a>
