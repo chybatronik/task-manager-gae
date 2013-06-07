@@ -38,7 +38,6 @@ class CreateTaskPage(BaseRequestHandler):
             task = Task(title = self.request.get("title"), 
                         text = self.request.get("text"), 
                         create_by = users.get_current_user(), 
-                        #company = company, 
                         attach_users = users_array,
                         attach_files = attach_files).put()
             self.redirect("/tasks/" + str(task.id()))  
@@ -80,14 +79,6 @@ class DeleteTaskPage(BaseRequestHandler):
         task = Task.get_by_id(int(task_id))
         task.delete()
         db.delete(task.key())
-
-        print task.is_saved()
-        print task.is_saved()
-        print task.is_saved()
-        print task.is_saved()
-        print task.is_saved()
-        print task.is_saved()
-        print task.is_saved()
         self.redirect("/tasks") 
 
 class DeleteBlobFromTask(BaseRequestHandler):
@@ -99,12 +90,3 @@ class DeleteBlobFromTask(BaseRequestHandler):
         task.put()
         blobstore.delete(key_blob)
         self.redirect("/tasks/" + str(task_id) + "/edit") 
-
-# class ShowTasksOfCompanyPage(BaseRequestHandler):
-#     def get(self, company_id ):
-#         company = Company.get_by_id(int(company_id))
-#         template_values = {
-#             "tasks": Task.all().filter("company = ", company),
-#             "company_of":company
-#         }
-#         self.generate("task/index.html", template_values)

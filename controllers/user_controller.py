@@ -2,7 +2,7 @@ from base_controller import *
 
 class AllUserInsurancePage(BaseRequestHandler):
     def get(self):
-        rpc = db.create_rpc(deadline=1, read_policy=db.STRONG_CONSISTENCY)
+        rpc = db.create_rpc(deadline=0.001, read_policy=db.STRONG_CONSISTENCY)
         users = UserInsurance.all().fetch(10, rpc=rpc)
         template_values = {
             "users":users,
@@ -21,7 +21,8 @@ class InviteUserInsurancePage(BaseRequestHandler):
         try:
             user = users.User(email=self.request.get("email"))
             user_insurance = UserInsurance(user=user)
-            db.put(user_insurance)
+            rpc = db.create_rpc(deadline=0.001, read_policy=db.STRONG_CONSISTENCY)
+            db.put(user_insurance,  rpc=rpc)
             self.redirect("/users")
         except db.BadValueError, errors:
             self.get(errors)
