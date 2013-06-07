@@ -77,6 +77,11 @@ class EditTaskPage(BaseRequestHandler):
 class DeleteTaskPage(BaseRequestHandler):
     def post(self, task_id):
         task = Task.get_by_id(int(task_id))
+        #delete blob files of task
+        list_blob_files = task.attach_files
+        for key_blob in list_blob_files:
+            blobstore.delete(key_blob)
+        #delete task
         task.delete()
         db.delete(task.key())
         self.redirect("/tasks") 
