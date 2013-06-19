@@ -23,7 +23,7 @@ def valid_email(email):
         ''', email, IGNORECASE | VERBOSE):
         raise db.BadValueError('Invalid email address')
 
-class Company(db.Model):
+class Category(db.Model):
     name = db.StringProperty(required=True)
     date = db.DateTimeProperty(auto_now_add=True)
     email = db.EmailProperty(required=True, validator=valid_email)
@@ -53,6 +53,7 @@ class Task(db.Model):
             return result
         else:
             return self.text
+    
     def get_urls_attach_files(self):
         result = []
         for key in self.attach_files:
@@ -68,6 +69,7 @@ class Task(db.Model):
                 image_url_200 = None
                 image_url_40 = None
 
+            return self.text
             di = {
                 "image_url_200":image_url_200,
                 "image_url_40":image_url_40,
