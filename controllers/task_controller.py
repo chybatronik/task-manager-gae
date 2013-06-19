@@ -42,7 +42,7 @@ class CreateTaskPage(BaseRequestHandler):
                         attach_files = attach_files)
             task.put()
             db.put(task)
-            self.redirect("/tasks/" + str(task.id()))  
+            self.redirect("/tasks/" + str(task.key().id()))  
         except db.BadValueError, errors:
             self.get(errors)
 

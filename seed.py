@@ -16,7 +16,7 @@ class SeedPage(BaseRequestHandler):
             user.delete()
             db.delete(user.key()) 
 
-        companies = Company.all()
+        companies = Category.all()
         for company in companies:
             company.delete()
             db.delete(company.key()) 
@@ -43,15 +43,15 @@ class SeedPage(BaseRequestHandler):
         user_insurance3.put()
         db.put(user_insurance3)
 
-        company1 = Company(name = "A-Z Group Ltd", create_by= user, email="Ltd@Group.com")
+        company1 = Category(name = "A-Z Group Ltd", create_by= user, email="Ltd@Group.com")
         company1.put()
         db.put(company1)
 
-        company2 = Company(name = "The Albany Engineering Co Ltd  ", create_by= user2, email="Albany@Engineering.com")
+        company2 = Category(name = "The Albany Engineering Co Ltd  ", create_by= user2, email="Albany@Engineering.com")
         company2.put()
         db.put(company2)
 
-        company3 = Company(name = "Alcoa Europe  ", create_by= user3, email="Alcoa@Europe.com")
+        company3 = Category(name = "Alcoa Europe  ", create_by= user3, email="Alcoa@Europe.com")
         company3.put()
         db.put(company3)
 

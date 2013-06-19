@@ -19,11 +19,11 @@ class IndexPage(BaseRequestHandler):
 
 application = webapp2.WSGIApplication([
     ('/', IndexPage),
-    ('/companies', AllCompanyPage),
-    ('/companies/create', CreateCompanyPage),
-    ('/companies/(\d+)', ShowCompanyPage),
-    ('/companies/(\d+)/edit', EditCompanyPage),
-    ('/companies/(\d+)/delete', DeleteCompanyPage),
+    ('/companies', AllCategoryPage),
+    ('/companies/create', CreateCategoryPage),
+    ('/companies/(\d+)', ShowCategoryPage),
+    ('/companies/(\d+)/edit', EditCategoryPage),
+    ('/companies/(\d+)/delete', DeleteCategoryPage),
 
     ('/tasks', AllTaskPage),
     ('/tasks/create', CreateTaskPage),
