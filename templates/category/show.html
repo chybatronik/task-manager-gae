@@ -1,0 +1,29 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<dl class="dl-horizontal">
+  <dt>Name</dt>
+  <dd>{{ category.name }}</dd>
+
+  <dt>Email</dt>
+  <dd>{{ category.email }}</dd>
+
+  <dt>Attach Users</dt>
+  <dd>
+    <ul class="inline">
+    {% for user_attach in category.attach_users %}
+      <li>
+        <span class="label label-info">{{ user_attach }}</span>
+      </li>
+    {% endfor %}
+    </ul>
+  </dd>
+
+  <dt>Create by</dt>
+  <dd>{{ category.create_by }}</dd>
+</dl>
+
+<a class="btn btn-info" href="/categories/{{ category.key().id() }}/edit">Edit</a>
+<a class="btn btn-info" href="/categories">All</a>
+
+{% endblock %}

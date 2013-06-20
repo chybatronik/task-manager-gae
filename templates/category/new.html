@@ -1,0 +1,40 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+
+<form class="form-horizontal" action="/categories/create" method="post">
+
+  <div class="control-group">
+    <label class="control-label" for="inputPassword">Name</label>
+    <div class="controls">
+      <input type="text" name="name" id="inputName" placeholder="Name">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+      <input type="text" name="email" id="inputEmail" placeholder="Email">
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputusers">Attach users</label>
+    <div class="controls">
+      <select name="users" id="inputusers" multiple="multiple">
+        {% for user in users %}
+          <option value="{{user.key().id()}}">{{user.user.email()}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+      
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Create</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}
