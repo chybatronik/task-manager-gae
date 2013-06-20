@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>email</th>
       <th>atach_users</th>
       <th>Create by</th>
     </tr>
@@ -16,7 +15,6 @@
       {% for category in categories %}
         <tr>
             <td><a href="/categories/{{ category.key().id()}}">{{ category.name }}</a></td>
-            <td>{{ company.email }}</td>
             <td class="span3">
               <ul class="inline">
               {% for user_attach in category.attach_users %}

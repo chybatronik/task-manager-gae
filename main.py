@@ -1,5 +1,5 @@
 from controllers.base_controller import *
-from controllers.company_controller import *
+from controllers.category_controller import *
 from controllers.task_controller import *
 from controllers.user_controller import *
 from controllers.file_controller import *
