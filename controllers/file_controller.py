@@ -23,7 +23,7 @@ def cleanup(blob_keys):
 
 def mime_type(filename):
     return guess_type(filename)[0]
-    
+
 class UploadHandler(webapp2.RequestHandler):
 
     def initialize(self, request, response):
@@ -103,11 +103,6 @@ class UploadHandler(webapp2.RequestHandler):
                         '/' + blob_key + '/' + urllib.quote(
                             result['name'].encode('utf-8'), '')
             results.append(result)
-        # deferred.defer(
-        #     cleanup,
-        #     blob_keys,
-        #     _countdown=EXPIRATION_TIME
-        # )
         return results
 
     def options(self):

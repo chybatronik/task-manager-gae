@@ -1,6 +1,7 @@
 from base_controller import *
 from google.appengine.api import images
 import cgi, re
+
 class AllUserInsurancePage(BaseRequestHandler):
     def get(self):
         users = UserInsurance.all()

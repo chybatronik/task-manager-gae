@@ -42,5 +42,5 @@ application = webapp2.WSGIApplication([
 
     ('/uploads', UploadHandler),
     ('/server', DownloadHandler)
-    
+
 ], debug=_DEBUG)

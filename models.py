@@ -40,8 +40,8 @@ class Task(db.Model):
         for key in self.attach_files:
             blob_info = blobstore.BlobInfo.get(key)
             filename =  blob_info.filename
-            extensionsToCheck = ('.png', '.jpeg', '.jpg')        
-            if filename.lower().endswith(extensionsToCheck):                
+            extensionsToCheck = ('.png', '.jpeg', '.jpg')
+            if filename.lower().endswith(extensionsToCheck):
                 image_url_200 = get_serving_url(key, 200)
                 image_url_40 = get_serving_url(key, 40)
                 image_url = get_serving_url(key, 1200)
